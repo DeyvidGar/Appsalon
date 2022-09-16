@@ -115,7 +115,7 @@ $router->comprobarRutas();
 // git commit -m "Primer deployment"
 // git branch -M main (el branch main es la rama pricipal ojo con esta rama leer documentacion para mas detalles
 // git remote add origin https://github.com/DeyvidGar/Appsalon.git
-// git push -u origin main (para subirlo al remote anterior. Aqui podemos hacer push al servicio de hosting para subir a produccion los cambios)
+// git push -u origin main (para subirlo al remote anterior. Aqui podemos hacer push al servicio de hosting para subir a produccion los cambios ejemplo: git push heroku main)
 
 //para la base de datos
 // heroku config | grep CLEARDB_DATABASE_URL
