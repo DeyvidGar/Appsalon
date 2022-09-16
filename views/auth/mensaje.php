@@ -1,0 +1,2 @@
+<h1 class="nombre-pagina">Revisa tu correo electronico</h1>
+<p class="descripcion-pagina">Te hemos enviado un correo electronico para continuar con tu registro, por favor sigue las indicaciones para finalizar registro.</p>
