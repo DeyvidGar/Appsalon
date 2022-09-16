@@ -8,6 +8,11 @@ use MVC\Router;
 class AdminController {
     public static function index( Router $router){
 
+        //variables de sesion
+        if(!isset($_SESSION)){
+            session_start();
+        }
+
         isAdmin();
 
         $alertas = AdminCitas::getAlertas();
@@ -15,11 +20,6 @@ class AdminController {
 
         if($alertaEliminar){
             AdminCitas::setAlerta('exito', 'Se elimino correctamente la cita.');
-        }
-
-        //variables de sesion
-        if(!isset($_SESSION)){
-            session_start();
         }
 
         date_default_timezone_set('America/Mexico_City');//si existe delay en la fecha por la zona por default
