@@ -12,7 +12,7 @@ class AdminController {
         // if(!isset($_SESSION)){
         //     session_start();
         // }
-        
+        // debuguear($_SESSION);
         isAdmin();
 
         $alertas = AdminCitas::getAlertas();
@@ -39,10 +39,10 @@ class AdminController {
         $query .= " FROM citas  ";
         $query .= " LEFT OUTER JOIN usuarios ";
         $query .= " ON citas.usuarioId=usuarios.id  ";
-        $query .= " LEFT OUTER JOIN citasservicios ";
-        $query .= " ON citasservicios.citasId=citas.id ";
+        $query .= " LEFT OUTER JOIN citasServicios ";
+        $query .= " ON citasServicios.citaId=citas.id ";
         $query .= " LEFT OUTER JOIN servicios ";
-        $query .= " ON servicios.id=citasservicios.serviciosId ";
+        $query .= " ON servicios.id=citasServicios.servicioId ";
         $query .= " WHERE fecha =  '${fecha}' ";
 
         $citas = AdminCitas::SQL($query);

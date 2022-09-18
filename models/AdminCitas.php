@@ -8,7 +8,7 @@ namespace Model;
 
 class AdminCitas extends ActiveRecord{
     //Tabla que tiene mas datos por consultar
-    protected static $tabla = 'citasservicios';
+    protected static $tabla = 'citasServicios';
     protected static $columnasDB = ['id', 'hora','cliente','email','telefono','servicios','precio'];
 
     public $id;

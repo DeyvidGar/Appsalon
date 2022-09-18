@@ -36,8 +36,8 @@ class APIController {
         foreach($idServicios as $idServicio){
             //creamos el arreglo asociativo que tiene que recibir el objeto de citasservicios y le asignamos sus respectivos valores en sus atributos
             $args = [
-                'serviciosId' => $idServicio,
-                'citasId' => $idCita
+                'servicioId' => $idServicio,
+                'citaId' => $idCita
             ];
             //instanciamos el objeto con los argumentos creaodos
             $citaservicio = new CitasServicios($args);
