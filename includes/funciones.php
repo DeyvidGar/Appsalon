@@ -23,7 +23,8 @@ function isAuth() : void{
 
 //validar si es admin si no lo es lo redireccionamos al login
 function isAdmin() : void{
-    if (!isset($_SESSION['admin'])) {
+    // debuguear($_SESSION);
+    if ($_SESSION['admin'] === '0') {
         header( 'Location: /cita');
     }
 }
