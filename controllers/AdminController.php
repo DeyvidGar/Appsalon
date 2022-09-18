@@ -9,10 +9,10 @@ class AdminController {
     public static function index( Router $router){
 
         //variables de sesion
-        if(!isset($_SESSION)){
-            session_start();
-        }
-
+        // if(!isset($_SESSION)){
+        //     session_start();
+        // }
+        
         isAdmin();
 
         $alertas = AdminCitas::getAlertas();

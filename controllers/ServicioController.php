@@ -9,9 +9,9 @@ class ServicioController {
     public static function index( Router $router ){
 
         //variables de sesion
-        if(!isset($_SESSION)){
-            session_start();
-        }
+        // if(!isset($_SESSION)){
+        //     session_start();
+        // }
 
         isAdmin();
 
@@ -61,9 +61,9 @@ class ServicioController {
 
     public static function actualizar( Router $router){
          //variables de sesion
-         if(!isset($_SESSION)){
-            session_start();
-        }
+        //  if(!isset($_SESSION)){
+        //     session_start();
+        // }
 
         isAdmin();
 
@@ -98,9 +98,9 @@ class ServicioController {
 
     public static function eliminar(){
         //variables de sesion
-        if(!isset($_SESSION)){
-            session_start();
-        }
+        // if(!isset($_SESSION)){
+        //     session_start();
+        // }
 
         isAdmin();
 
