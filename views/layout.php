@@ -15,6 +15,6 @@
         </div>
     </div>
 
-    <?php echo $script ?? ''; //imprimimos la variable que sera asignado en el archivo que ocupemos?>
+    <?php echo $script ?? '';?>
 </body>
 </html>

@@ -1,5 +1,4 @@
 <?php
-//namespace que debe estar sincronisado con el autoload de composer
 namespace Controllers;
 
 use Classes\Email;
@@ -23,11 +22,10 @@ class LoginController {
                 $usuario = $auth->where('email', $email);
                 
                 if($usuario){
-                    //usuario existente
+                    //validar pass y usuario verificado en la bd
                     $resultado = $usuario->comporbarPasswordAndVerificado($auth->password);
 
                     if($resultado){
-                        //retorna true es decir todo valido
                         $usuario->login();
                     }
 
@@ -36,7 +34,6 @@ class LoginController {
                 }
 
                 $alertas = Usuario::getAlertas();
-                // debuguear($alertas);
             }
         }
 
@@ -69,7 +66,6 @@ class LoginController {
 
                     $usuario->guardar();
 
-                    //Enviar email - con clase de email (no phpmailer)
                     $email = new Email($usuario->nombre, $usuario->email, $usuario->token);
 
                     $email->enviarInstrucciones();
@@ -77,9 +73,7 @@ class LoginController {
                     $alertas = Usuario::setAlerta('exito', 'Revisa tu email y sigue las indicacion para continuar');
                 } else {
                     $alertas = Usuario::setAlerta('error', 'Este correo no esta registrado o no ha confirmado su cuenta');
-                }
-    
-                // // debuguear($usuario);    
+                }   
             }
         }
 
@@ -141,25 +135,20 @@ class LoginController {
 
             $alertas = $usuario->validarNuevaCuenta();
 
-            //revisar que alertas este vacio
             if(empty($alertas)){
                 $resultado = $usuario -> findUsuario();
 
                 if($resultado){
-                    $alertas = Usuario::getAlertas(); //EN EL METODO FINDUSUARIO AGREGAMOS EN LA CLASE USUARIO UNA ALAERTA POR LO TANTO LEEMOS ESA ALERTA CON EL NOMBRE DE LA CLASE::GETALERTAS 
+                    //si el usuario existe
+                    $alertas = Usuario::getAlertas();
                 } else {
                     //no esta registrado - guardar registro
 
-                    //Hashear password
                     $usuario->hashPassword();
 
-                    //Generar un token - para asegurarnos de que el correo introducido en nuestro sistema no sea falso los filtramos con un token de autenticacion
                     $usuario->crearToken();
 
-                    //instalar una dependencia en composer y despues actualizar xomposer con composer update
-                    //creamos la carpeta classes que no son objetos que interactuan con la base de datos es decir modelos, solo son clases de ayuda en te caso para el codigo de enviar emails
-
-                    //unavez que instanciamos el objeto el constructor recibe dichos valores
+                    //clase para enviar email con phpmailer
                     $email = new Email($usuario->nombre, $usuario->email, $usuario->token);
 
                     $resultadoEmail = $email->enviarEmail();
@@ -167,7 +156,7 @@ class LoginController {
                     if(!$resultadoEmail){
                         Usuario::setAlerta('error', 'El correo electronico no se pudo enviar');
                     } else {
-                        $resultado = $usuario->guardar(); //esta creando retorna dos valores. (?)
+                        $resultado = $usuario->guardar();
                         
                         if($resultado['resultado']){
                             header('Location: /mensaje');
@@ -175,7 +164,6 @@ class LoginController {
                             Usuario::setAlerta('error', 'Algo salio mal, vuelve a intentarlo');
                         }
                     }
-
                     $alertas = Usuario::getAlertas();
                 }
             }
@@ -189,7 +177,6 @@ class LoginController {
 
     public static function confirmar_cuenta( Router $router ){
 
-        //alerta en caso de no coincidir el token con el registrado en la db
         $alertas = [];
 
         $token = sanitizar($_GET['token']);
@@ -197,12 +184,9 @@ class LoginController {
         $usuario = Usuario::where('token', $token);
 
         if(is_null($usuario)){
-            //Mensaje de error
             Usuario::setAlerta('error', 'Token no valido');
         } else{
             //autenticar usuario
-
-            //confirmar en la bd y limpiar token
             $usuario->confirmado = 1;
             $usuario->token = '';
 
@@ -224,7 +208,6 @@ class LoginController {
     }
 
     public static function mensaje( Router $router ){
-
         $router->render('auth/mensaje');
     }
 }

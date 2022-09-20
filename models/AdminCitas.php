@@ -1,13 +1,8 @@
 <?php
 namespace Model;
 
-/**
- * CON ESTE MODELO UNIREMOS LAS TABLAS CON LA QUE ACCEDEMOS ALA CITA, SERVICIOS Y CLIENTE USANDO JOIN, UMPURTANTE DEFINIR LA CARDINALIDAD PARA UNA CONSULTA CLARA, NOTA: HACER ESTE TIPO DE CONSULTAS CONSUME MEMORIA Y CARGA AL SERVIDOR
- * 
- */
-
 class AdminCitas extends ActiveRecord{
-    //Tabla que tiene mas datos por consultar
+
     protected static $tabla = 'citasServicios';
     protected static $columnasDB = ['id', 'hora','cliente','email','telefono','servicios','precio'];
 

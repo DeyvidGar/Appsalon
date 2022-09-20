@@ -23,10 +23,10 @@
 <div class="citas-admin" id="citas-admin">
     <ul class="contenedor-citas">
         <?php 
-        $aux = 0; //varible auxiliar que nos ayuda a comprovar que no se repitan los mismos datos del mismo id
+        $aux = 0;
         foreach($citas as $key => $cita):
-            if($aux !== $cita->id): //cuando es diferente entra e imprime los datos la segunda iteracion cambiara de valor  o no entrar omitiendo campos repetidos
-                $total = 0;//LO COLOCAMOS DESDE AQUI POR QUE CADA VEZ QUE ITERE EN UNA NUEVA CITA EL ACUMULADOR SE REINICIA
+            if($aux !== $cita->id):
+                $total = 0;
                 ?>
                 <li>
                     <div class="informacion">
@@ -43,20 +43,16 @@
             ?>
 
             <p class="servicios-admin"><?php echo $cita->servicios. ' ' . $cita->precio; ?></p>
+
             <?php 
         
             //METODO PARA VERIFICAR SI NOS ENCONTRAMOS EN EL ULTIMO SERVICIO DEL ID ACTUAL DENTRO DE LA ITERACION DE LOS SERVICIOS
-            $actual = $cita->id; // ID QUE SERVIRA PARA COMPARLO CON EL PROXIMO
-            $proximo =  $citas[$key + 1]->id ?? 0; // EL PROXIMO SE SITUA EN LA POSICIO DEL ARREGLO SIGUIENTE DELA POSICION ACTUAL Y GUARDAMOS SU ID, EL ID SERA EL MISMO CUANDO NOS ENCONTREMOS EN EL MISMO ID DE LA CITA ACTUAL CAMBIARA CUANDO EL PROXIMO TENGA UN ID DIFERNTE ES DECIR EL ID SIGUIENTE, EN CASO DE NO HABER MAS ARREGLOS LE ASIGNAMOS EL VALOR 0 PARA EVADIR ERRORES
-        
-            // echo '<hr>';
-            // echo $actual;
-            // echo '<hr>';
-            // echo $proximo;
-            // echo '<hr>';
+            $actual = $cita->id; 
+            $proximo =  $citas[$key + 1]->id ?? 0;
 
             $total += $cita->precio;
-            //la funcion devuelve true si los valores son direntes es decir que se encuentra en el ultimo arreglo del la cita actual
+
+            //la funcion devuelve true si  se encuentra en el ultimo arreglo del la cita actual
             if(esUltimo($actual, $proximo)){
                 ?>
                 <p class="total">Total: $<span><?php echo $total;?></span></p>

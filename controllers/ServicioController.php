@@ -8,11 +8,7 @@ class ServicioController {
 
     public static function index( Router $router ){
 
-        //variables de sesion
-        // if(!isset($_SESSION)){
-        //     session_start();
-        // }
-
+        //validar usuario
         isAdmin();
 
         $servicios = Servicios::all();
@@ -24,11 +20,7 @@ class ServicioController {
     }
     
     public static function crear( Router $router ){
-         //variables de sesion
-         if(!isset($_SESSION)){
-            session_start();
-        }
-
+        //validar usuario
         isAdmin();
 
         $servicio = new Servicios;
@@ -60,11 +52,7 @@ class ServicioController {
     }
 
     public static function actualizar( Router $router){
-         //variables de sesion
-        //  if(!isset($_SESSION)){
-        //     session_start();
-        // }
-
+        //validar usuario
         isAdmin();
 
         if(!is_numeric($_GET['id'])) return;
@@ -97,14 +85,11 @@ class ServicioController {
     }
 
     public static function eliminar(){
-        //variables de sesion
-        // if(!isset($_SESSION)){
-        //     session_start();
-        // }
-
+        //validar usuario
         isAdmin();
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
             $servicio = Servicios::find($_POST['id']);
 
             $servicio->eliminar();

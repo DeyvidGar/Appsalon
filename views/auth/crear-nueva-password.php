@@ -14,8 +14,6 @@
         <input type="submit" value="Cambiar contraseña" class="boton">
     </form>
 
-<?php //endif;?>
-
 <div class="acciones">
     <a href="/">¿Ya tienes una cuenta? Inicia sesión aquí</a>
     <a href="/registrar-nueva-cuenta">¿Aun no tienes una cuenta? Registrate aquí</a>

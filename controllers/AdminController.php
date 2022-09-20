@@ -8,11 +8,7 @@ use MVC\Router;
 class AdminController {
     public static function index( Router $router){
 
-        //variables de sesion
-        // if(!isset($_SESSION)){
-        //     session_start();
-        // }
-        // debuguear($_SESSION);
+        //validacion
         isAdmin();
 
         $alertas = AdminCitas::getAlertas();
@@ -22,12 +18,10 @@ class AdminController {
             AdminCitas::setAlerta('exito', 'Se elimino correctamente la cita.');
         }
 
-        date_default_timezone_set('America/Mexico_City');//si existe delay en la fecha por la zona por default
+        date_default_timezone_set('America/Mexico_City');
         $fecha = $_GET['fecha'] ?? date('Y-m-d');
 
-        //validar fecha
         $fechaExplode = explode('-', $fecha);
-
         //funcion checkdate que devuelve bool si existe la fecha
         if( !checkdate($fechaExplode[1], $fechaExplode[2], $fechaExplode[0])){//si ungresa un valor que no es fecha lo redireccionamos
             header('Location: /404');
@@ -46,8 +40,6 @@ class AdminController {
         $query .= " WHERE fecha =  '${fecha}' ";
 
         $citas = AdminCitas::SQL($query);
-
-        // debuguear($citas);// el arreglo con los objetos resultado de las consultas
 
         $alertas = AdminCitas::getAlertas();
 

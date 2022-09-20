@@ -36,7 +36,7 @@
                 <label for="fecha">Fecha:</label>
                 <input 
                     type="date"
-                    min="<?php echo date('Y-m-d'/**,strtotime('+1 day') */ ); // si queremos que la citas se programen un dia despues del actual?>"
+                    min="<?php echo date('Y-m-d' ,strtotime('+1 day')); // si queremos que la citas se programen un dia despues del actual?>"
                     id="fecha"/>
             </div>
             <div class="campo">

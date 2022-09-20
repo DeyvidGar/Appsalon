@@ -1,14 +1,11 @@
 <?php
-//PARA EL DEPLOYMENT DEBEMOS OCULTAR ESTA INF EN UN ARCHIVO .ENV QUE CONTIENE VARIBLES DE ENTORNO QUE SERAN DE FORMA PRIVADA
+//conexion con variables de entorno
 $db = mysqli_connect(
     $_ENV['DB_HOST'], 
     $_ENV['DB_USER'], 
     $_ENV['DB_PASS'], 
     $_ENV['DB_BD'] 
 );
-
-// debuguear($_ENV);
-
 
 if (!$db) {
     echo "Error: No se pudo conectar a MySQL.";

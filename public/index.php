@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/../includes/app.php';
 
-//importamos las clases que vallamos a ocupar que se cargan automaticamente o manualmente
-
 use Controllers\AdminController;
 use Controllers\APIController;
 use Controllers\LoginController;
@@ -49,13 +47,11 @@ $router->post('/api/citas/eliminar', [APIController::class, 'eliminar']);
 
 //PANEL DE ADMINISTRACION crud servicios
 $router->get('/servicios', [ServicioController::class, 'index']);
-$router->get('/servicios/nuevo-servicio', [ServicioController::class, 'crear']); //muestra los datos
+$router->get('/servicios/nuevo-servicio', [ServicioController::class, 'crear']); //muestra pagina
 $router->post('/servicios/nuevo-servicio', [ServicioController::class, 'crear']); //envia datos
 $router->get('/servicios/actualizar', [ServicioController::class, 'actualizar']);//muestra los datos
 $router->post('/servicios/actualizar', [ServicioController::class, 'actualizar']);//envia datos
 $router->post('/servicios/eliminar', [ServicioController::class, 'eliminar']);
-
-
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

@@ -3,11 +3,10 @@
 namespace Model;
 
 class Usuario extends ActiveRecord{
-    //base de datos
+
     protected static $tabla = 'usuarios';
     protected static $columnasDB = ['id', 'nombre' , 'apellido' , 'telefono' , 'password' , 'email' , 'confirmado' , 'token' , 'admin' ];
 
-    //atributos
     public $nombre;
     public $apellido;
     public $telefono;
@@ -30,7 +29,6 @@ class Usuario extends ActiveRecord{
         $this->confirmado = $args['confirmado'] ?? 0;
     }
 
-    //validar login
     public function validarLogin(){
         if(!$this->email){
             self::$alertas['error'][] = 'Debes ingresar un correo electronico';
@@ -42,7 +40,6 @@ class Usuario extends ActiveRecord{
         return self::$alertas;
     }
 
-    //mensajes de validacion para la creacion de una cuenta
     public function validarNuevaCuenta(){
         if(!$this->nombre){
             self::$alertas['error'][] = 'El nombre es obligatorio';
@@ -89,7 +86,6 @@ class Usuario extends ActiveRecord{
         $resultado = self::consultarSQL($query);
 
         if($resultado){
-            //AQUI SOLO LE ASIGNAMOS EL VALOR A ESTE VARIABLE Y NO RETORNAMOS PARA DEBOLVER EL RESULTADO Y VALIDARLO EN EL CONTROLLER
             self::$alertas['error'][] = 'Este correo ya esta registrado';
         }
 
@@ -101,8 +97,6 @@ class Usuario extends ActiveRecord{
         //hash password (60 caracteres)
         $passwordHash = password_hash($this->password, PASSWORD_DEFAULT);
         $this->password = $passwordHash;
-
-        // $this->password = password_hash($this->password, PASSWORD_DEFAULT); // metodo corto
     }
 
     public function crearToken(){
@@ -110,7 +104,7 @@ class Usuario extends ActiveRecord{
     }
 
     public function comporbarPasswordAndVerificado($password){
-        //verificar contraseña
+
         $validar = password_verify($password,$this->password);
         $confirmado = $this->confirmado ?? '';
                 
@@ -134,17 +128,11 @@ class Usuario extends ActiveRecord{
             if($key === 'password')continue; //ignoramos la columna de admin         
             $_SESSION[$key] = $value;
         }
-        // debuguear($_SESSION);
+
         if($this->admin === '1'){
-            // $_SESSION['admin'] = 1;
             header('Location: /admin');
         } else{
             header('Location: /cita');
         }
-
-        //manera manual solo las varibles que ocupemos
-        // $_SESSION['nombre']=$this->nombre;
-
-        // debuguear($_SESSION);
     }
 }
