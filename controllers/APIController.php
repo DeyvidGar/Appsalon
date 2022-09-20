@@ -51,7 +51,7 @@ class APIController {
 
             if($resul){
                 //redireccionamiento a la direccion de la pagina anterior
-                header('Location: '. $_SERVER['HTTP_REFERER'] .'&cita-eliminada=1');
+                header('Location: '. $_SERVER['HTTP_REFERER'] .'?cita-eliminada=1');
             }
         }
     }
