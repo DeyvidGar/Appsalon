@@ -45,13 +45,27 @@ class APIController {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+            
             $cita = Cita::find($id);
+            
+            //validar si eliminamos cita de hoy
+            $isToday = true;
+            date_default_timezone_set('America/Mexico_City');
+            $fecha = date('Y-m-d');
+            if($fecha !== $cita->fecha){
+                $isToday = false;
+            }
 
             $resul = $cita->eliminar();
 
             if($resul){
-                //redireccionamiento a la direccion de la pagina anterior
-                header('Location: '. $_SERVER['HTTP_REFERER'] .'?cita-eliminada=1');
+                //validar si es el dia hoy / bug en redireccionamiento eliminar cita
+                if($isToday){
+                    header('Location: '. $_SERVER['HTTP_REFERER'] .'?cita-eliminada=1');
+                } else {
+                    header('Location: '. $_SERVER['HTTP_REFERER'] .'&cita-eliminada=1');
+
+                }
             }
         }
     }
